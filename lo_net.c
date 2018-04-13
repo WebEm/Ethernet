@@ -82,7 +82,7 @@ static const struct net_device_ops lo_net_net_ops = {
 	.ndo_change_mtu = lo_net_set_mtu,
 };
 
-static int lo_net_probe (struct platform_device *ebcm_pdev)
+static int lo_net_probe (struct platform_device *lo_net_pdev)
 {
 	struct net_device *dev;
 	struct lo_net_info *priv;
@@ -90,7 +90,7 @@ static int lo_net_probe (struct platform_device *ebcm_pdev)
 	uint32_t err;
 	
 	pl();
-	dev = alloc_etherdev(sizeof(struct ebmc_info));
+	dev = alloc_etherdev(sizeof(struct lo_net_info));
 	if (!dev)
 		return -ENODEV;
 
@@ -113,7 +113,7 @@ static int lo_net_probe (struct platform_device *ebcm_pdev)
 	return 0;
 }
 
-static int lo_net_remove(struct platform_device *ebcm_pdev)
+static int lo_net_remove(struct platform_device *lo_net_pdev)
 {
 	struct device  *dp;
 	struct net_device *dev;
